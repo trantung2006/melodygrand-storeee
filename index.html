@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập Melody Grand</title>
+   
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        
+        :root {
+            --color-primary: #b7c54f; 
+            --color-secondary: white; 
+            --color-background: #F8F8F8; 
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-background);
+        }
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: var(--color-secondary);
+            transition: background-color 0.3s, transform 0.1s;
+        }
+        .btn-primary:hover {
+            background-color: #d3cab2;
+        }
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+        .card-bg {
+            background-color: white;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 0 10px 0 rgba(0, 0, 0, 0.04);
+            border-top: 5px solid var(--color-primary);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    
+    <div class="card-bg w-full max-w-sm mx-auto rounded-xl overflow-hidden p-8 transition duration-300">
+
+        <div class="flex flex-col items-center mb-8">
+            
+            <img src="https://scontent.fhan14-3.fna.fbcdn.net/v/t39.30808-6/581931038_122131144850974830_8990625932864666516_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_ohc=tBTI03M2TBcQ7kNvwGHZ40y&_nc_oc=AdnzAx7xtGexvRZ-Q4wIQxTX2-Junct1RS772dkvs9obGkLnAfmcP0aLm2wiMdsYy5ckWfbrM7S774XNf2ml34VT&_nc_zt=23&_nc_ht=scontent.fhan14-3.fna&_nc_gid=Dwq1AetudeBB6NF1pfSNag&oh=00_AfgpqUbbzM3kkd6-UX_fJrwUK654FloTwj0Swmssrvvstw&oe=6927A937" 
+                 alt="Melody Grand Logo" 
+                 class="w-32 h-32 object-contain mb-4 rounded-full border-2 border-primary p-1"
+                 onerror="this.onerror=null; this.src='https://placehold.co/128x128/D4AF37/0A0A0A?text=MELODY%0AGRAND'">
+            
+            <h1 class="text-3xl font-bold text-center text-gray-800 tracking-tight">Đăng Nhập</h1>
+            <p class="text-sm text-gray-500 mt-1">Truy cập vào tài khoản âm nhạc của bạn</p>
+        </div>
+
+        
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            
+            <!-- Email Field -->
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <input type="email" id="email" name="email" required 
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] transition duration-150"
+                       placeholder="nhap@emailcuaban.com">
+            </div>
+
+            <div class="mb-6">
+                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Mật khẩu</label>
+                <input type="password" id="password" name="password" required 
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] transition duration-150"
+                       placeholder="••••••••">
+            </div>
+
+            <div class="flex justify-between items-center mb-6 text-sm">
+                <label class="flex items-center">
+                    <input type="checkbox" class="h-4 w-4 text-[var(--color-primary)] border-gray-300 rounded focus:ring-[var(--color-primary)]">
+                    <span class="ml-2 text-gray-600">Ghi nhớ tôi</span>
+                </label>
+                <a href="#" class="text-[var(--color-primary)] hover:text-yellow-600 font-medium">Quên mật khẩu?</a>
+            </div>
+
+           
+            <button type="submit" class="btn-primary w-full py-2.5 rounded-lg font-semibold text-lg hover:shadow-md">
+                Đăng Nhập
+            </button>
+            
+           
+            <div id="messageBox" class="mt-4 p-3 text-sm rounded-lg text-center hidden" role="alert"></div>
+
+        </form>
+        
+        <p class="text-center text-sm text-gray-500 mt-6">
+            Chưa có tài khoản? 
+            <a href="#" class="text-[var(--color-primary)] hover:text-yellow-600 font-medium">Đăng ký ngay</a>
+        </p>
+    </div>
+
+
+    <script>
+    function handleLogin(event) {
+        event.preventDefault();
+
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const messageBox = document.getElementById('messageBox');
+        
+        // Định nghĩa URL trang chủ
+        const HOME_PAGE_URL = 'home.html'; 
+
+        messageBox.classList.add('hidden');
+        messageBox.textContent = '';
+        messageBox.classList.remove('bg-red-100', 'text-red-700', 'bg-green-100', 'text-green-700');
+
+        
+        if (email === '' || password === '') {
+            messageBox.classList.remove('hidden');
+            messageBox.classList.add('bg-red-100', 'text-red-700');
+            messageBox.textContent = 'Vui lòng điền đầy đủ Email và Mật khẩu.';
+        } else {
+            
+            messageBox.classList.remove('hidden');
+            messageBox.classList.add('bg-green-100', 'text-green-700');
+            // Cập nhật thông báo để người dùng biết sắp chuyển hướng
+            messageBox.textContent = `Đăng nhập thành công! Chào mừng ${email}. Đang chuyển hướng...`; 
+            
+            
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            
+            // --- ĐÃ THÊM: CHUYỂN HƯỚNG SAU 3 GIÂY ---
+            setTimeout(() => {
+                submitBtn.disabled = false;
+                // Thực hiện chuyển hướng trình duyệt
+                window.location.href = HOME_PAGE_URL; 
+            }, 1000);
+            // ----------------------------------------
+        }
+    }
+</script>
+</body>
+</html>
